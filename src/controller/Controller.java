@@ -1,7 +1,12 @@
 package controller;
 
+
 import java.util.Scanner;
 
+import model.Comparendo;
+import model.data_structures.ILinkedList;
+import model.data_structures.LinkedList;
+import model.data_structures.Node;
 import model.logic.Modelo;
 import view.View;
 
@@ -9,10 +14,9 @@ public class Controller {
 
 	/* Instancia del Modelo*/
 	private Modelo modelo;
-	
+
 	/* Instancia de la Vista*/
 	private View view;
-	
 	/**
 	 * Crear la vista y el modelo del proyecto
 	 * @param capacidad tamaNo inicial del arreglo
@@ -21,83 +25,41 @@ public class Controller {
 	{
 		view = new View();
 		modelo = new Modelo();
+	
 	}
-		
+
 	public void run() 
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-		String dato = "";
-		String respuesta = "";
-
+		
 		while( !fin ){
 			view.printMenu();
 
 			int option = lector.nextInt();
 			switch(option){
-				case 1:
-					view.printMessage("--------- \nCrear Arreglo \nDar capacidad inicial del arreglo: ");
-				    int capacidad = lector.nextInt();
-				    modelo = new Modelo(capacidad); 
-				    view.printMessage("Arreglo Dinamico creado");
-				    view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
+			case 1:
+				modelo = new Modelo();
+				
+				long start = System.currentTimeMillis();
+				String respuestaModelo = modelo.cargarlinkedList();
+			    long end = System.currentTimeMillis();
+			    view.printMessage("Tiempo de carga (seg): " + (end-start)/1000.0);
+				view.printMessage("tamaño: " + respuestaModelo.split(";")[0] + "\n");
+				view.printMessage("el de mayor id es " + respuestaModelo.split(";")[1]);
+				view.printMessage("El punto minimo es "  + respuestaModelo.split(";")[2] +"," + respuestaModelo.split(";")[3] + " y el punto máximo es " + respuestaModelo.split(";")[4]+ "," + respuestaModelo.split(";")[5] + "\n");
 
-				case 2:
-					view.printMessage("--------- \nDar cadena (simple) a ingresar: ");
-					dato = lector.next();
-					modelo.agregar(dato);
-					view.printMessage("Dato agregado");
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
+				break;
 
-				case 3:
-					view.printMessage("--------- \nDar cadena (simple) a buscar: ");
-					dato = lector.next();
-					respuesta = modelo.buscar(dato);
-					if ( respuesta != null)
-					{
-						view.printMessage("Dato encontrado: "+ respuesta);
-					}
-					else
-					{
-						view.printMessage("Dato NO encontrado");
-					}
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
+			case 2:
+				fin = true;
+				break;
 
-				case 4:
-					view.printMessage("--------- \nDar cadena (simple) a eliminar: ");
-					dato = lector.next();
-					respuesta = modelo.eliminar(dato);
-					if ( respuesta != null)
-					{
-						view.printMessage("Dato eliminado "+ respuesta);
-					}
-					else
-					{
-						view.printMessage("Dato NO eliminado");							
-					}
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 5: 
-					view.printMessage("--------- \nContenido del Arreglo: ");
-					view.printModelo(modelo);
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;	
-					
-				case 6: 
-					view.printMessage("--------- \n Hasta pronto !! \n---------"); 
-					lector.close();
-					fin = true;
-					break;	
-
-				default: 
-					view.printMessage("--------- \n Opcion Invalida !! \n---------");
-					break;
+			default: 
+				view.printMessage("--------- \n Opcion Invalida !! \n---------");
+				break;
 			}
 		}
-		
+
 	}	
 }
