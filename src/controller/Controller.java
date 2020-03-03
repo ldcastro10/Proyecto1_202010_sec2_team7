@@ -60,18 +60,6 @@ public class Controller {
 				view.printMessage("Tiempo de carga (seg): " + (end-start)/1000.0);
 				view.printMessage("Datos cargados: " + consulta.tamaño() + "\n");
 				view.printMessage("Primer dato: " + consulta.get(0) + "\n");
-				view.printMessage("Ultimo dato: " + consulta.darCapacidad() + "\n");
-
-	
-
-		//		view.printMessage("Ultimo dato: " + f.toString() + "\n");
-				view.printMessage("Ultimo dato: " + consulta.get(1).getFechaDate() + "\n");
-
-				Date date1 = new Date(2008,3,2);
-				Date date2 = new Date(2009,01,15);
-				
-				System.out.println(date2.before(date1));
-
 				break;
 
 			case 2: 
@@ -97,6 +85,23 @@ public class Controller {
 					System.out.println("------------------------------------------------------------------------------------------------------------");
 				}
 				break;
+			case 4: 
+				System.out.println("4. comparendos comparados por fecha");
+				System.out.println("Digite la fecha1:");
+				String pfecha11111 = lector.next();
+				System.out.println("Digite la fecha2:");
+				String pfecha22222 = lector.next();
+				String[] rta33 = modelo.TerceroA(consulta, pfecha11111, pfecha22222);
+				System.out.println("estos son:");
+
+				for(int i = 0; i < modelo.jcon3a;i++)
+				{
+
+					System.out.println(rta33[i]);
+				}
+
+				break;	
+				
 			case 5: 
 				System.out.println("5. primer comparendo con tal infraccion");
 				System.out.println("Digite la infraccion:");
@@ -104,7 +109,7 @@ public class Controller {
 				view.printMessage("rta es: " + modelo.primeroB(pinfraccion1,consulta ));
 				break;
 			case 6: 
-				System.out.println("5. comparendos por codigo");
+				System.out.println("6. comparendos por codigo");
 				System.out.println("Digite el codigo:");
 				String pcodigo = lector.next();
 				Comparendo[] rta2 = modelo.segundoB(pcodigo, consulta);
@@ -119,9 +124,67 @@ public class Controller {
 
 				}
 				break;
+			case 7: 
+				System.out.println("4. comparendos comparados por fecha");
+
+				String[] rta3333 = modelo.TerceroB(consulta);
+				System.out.println("estos son:");
+
+				for(int i = 0; i < modelo.jcon3a;i++)
+				{
+
+					System.out.println(rta3333[i]);
+				}
+
+				break;
+			case 8: 
+				System.out.println("8. comparendos por localidad y fecha con tabla de infraccion");
+				System.out.println("Digite la localidad:");
+				String plocalidad = lector.next();
+				System.out.println("Digite la fecha1:");
+				String pfecha1 = lector.next();
+				System.out.println("Digite la fecha2:");
+				String pfecha2 = lector.next();
+				String[] rta3 = modelo.Cprimero(consulta, pfecha1, pfecha2, plocalidad);
+				System.out.println("estos son:");
+
+				for(int i = 0; i < 200000 ;i++)
+				{
+
+					System.out.println(rta3[i]);
+				}
+
+				break;
+			case 9: 
+				
+				System.out.println("9. los comparendos con mas infracciones en un tiempo dado");
+				System.out.println("Digite el numero:");
+				int pnumero = lector.nextInt();
+				System.out.println("Digite la fecha1:");
+				String pfecha11 = lector.next();
+				System.out.println("Digite la fecha2:");
+				String pfecha22 = lector.next();
+				String[] rta4 = modelo.Csegundo(consulta, pfecha11, pfecha22);
+				System.out.println("estos son:");
+
+				for(int i = 0; i < pnumero ;i++)
+				{
+					System.out.println(rta4[i]);
+				}
+				break;
+             case 10: 
+				
+				System.out.println("10. localidalidades y comparendos");
+				String[] rta44 = modelo.Ctercero(consulta);
+				System.out.println("estos son:");
+
+				for(int i = 0; i < 21 ;i++)
+				{
+					System.out.println(rta44[i]);
+				}
+				break;
 
 			}
 		}
-
-	}	
+	}
 }

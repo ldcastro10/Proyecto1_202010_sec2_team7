@@ -2,8 +2,7 @@ package model.data_structures;
 
 import model.Comparendo;
 
-public class MergeSortCodigo {
-
+public class MergeSortCodigo3 {
 	private static Comparendo[] aux;
 
 	public static void sort(Comparendo[] a)
@@ -53,7 +52,7 @@ public class MergeSortCodigo {
 	}
 	private static boolean less(Comparendo x, Comparendo y) 
 	{	
-		return x.getInfraccion().compareTo(y.getInfraccion())>0;
+		return x.getInfraccion().compareTo(y.getInfraccion())<0;
 	}
 
 }
